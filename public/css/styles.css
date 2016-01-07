@@ -1,0 +1,255 @@
+@CHARSET "UTF-8";
+@font-face {
+    font-family: 'TitilliumWeb-Regular';
+    src: url(../fonts/Titillium_Web/TitilliumWeb-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+
+}
+*{
+	font-family: "TitilliumWeb-Regular", Arial, Helvetica, Geneva, sans-serif;
+}
+body {
+	padding-top: 60px;
+	background-color: #f9f9f9;
+	
+}
+
+.initform {
+	margin: auto;
+	width: 250px;
+	border: 1px solid silver;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 25px;
+	background-color: white;
+}
+
+#msg {
+	margin-right: auto;
+	margin-left: auto;
+	width: 400px;
+	display: none;
+}
+
+.errors {
+	font-size: 90%;
+	color: red;
+}
+
+footer {
+	color: gray;
+	font-size: 85%;
+	text-align: center;
+}
+
+.infooptimus {
+	margin-left: 50px;
+	margin-bottom: 20px;
+	color: gray;
+	font-size: 95%;
+}
+
+.form_boletins_submit {
+	margin: auto;
+	padding-top: 20px;
+	width: 250px;
+}
+
+.mywhite {
+	background-color: white;
+}
+
+.space {
+	padding: 20px 0 30px 30px;
+}
+
+.space p {
+	padding-bottom: 8px;
+	color: #4b95c5;
+}
+
+.txtsmall {
+	font-size: 95%;
+}
+
+.esp {
+	padding-left: 20px;
+	padding-right: 30px;
+}
+
+#txt-errors {
+	color: red;
+}
+
+.txt_errors {
+	color: red;
+}
+
+#txt-errors a:hover {
+	color: red;
+	text-decoration: underline;
+}
+
+.size-20 {
+	width: 120px;
+}
+
+.centerz {
+	margin: auto;
+	width: 900px;
+	padding-top: 10px;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+.txt-center {
+	text-align: center;
+}
+
+.spacer10 {
+	padding: 10px;
+}
+
+.spacer20 {
+	padding: 20px;
+}
+
+.pagination-div {
+	width: 500px;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 85%;
+	margin-bottom: 10px;
+}
+
+.pag a {
+	padding-left: 8px;
+	padding-right: 8px;
+	border-right: 1px solid silver;
+}
+
+.ui-effects-transfer {
+	background: url(/images/mail_2.png) no-repeat;
+}
+
+.disabled {
+	color: silver;
+}
+
+.pageof {
+	color: gray;
+	font-size: 95%;
+}
+
+.icon-blue {
+	background-image: url("http://cdn.fterceiro.pt/library/bootstrap/img/glyphicons-halflings-blue.png");
+}
+
+.icon-green {
+	background-image: url("http://cdn.fterceiro.pt/library/bootstrap/img/glyphicons-halflings-green.png");
+}
+
+.animation-space {
+	padding: 2px 8px 2px 15px;
+	background-color: #f2fafe;
+	border-right: 1px solid #c7eafb;
+	border-bottom: 1px solid #c7eafb;
+	font-size: 90%;
+	color: #001357;
+}
+
+.alert-optimus {
+	color: #e0120e;
+	padding-left: 10px;
+	margin-left: 10px;
+}
+
+.optimus_txt2 {
+	text-align: center;
+	padding: 8px;
+}
+
+.txt-optimus-index {
+	color: gray;
+	font-size: 10px;
+	
+}
+
+.txt-optimus-index textarea {
+	width: 270px;
+	height: 200px;
+	font-size: 11px;
+	border-style: none;
+	outline: none;
+	resize: none;
+}
+
+.table-opt {
+	text-align: center;
+}
+
+.table-opt th {
+	font-size: 12px;
+	padding-right: 8px;
+	padding-left: 5px;
+}
+
+.table-opt td {
+	padding-right: 25px;
+	
+}
+
+.table-opt-click {
+	cursor: pointer;
+}
+.sz-12 {
+	font-size: 12px;
+}
+.sz-14 {
+	font-size: 14px;
+}
+.sz-16 {
+	font-size: 16px;
+}
+.sz-18 {
+	font-size: 18px;
+}
+.sz-20 {
+	font-size: 20px;
+}
+.sp-bottom-5{
+	margin-bottom: 5px;
+}
+.sp-bottom-8{
+	margin-bottom: 8px;
+}
+.sp-bottom-10{
+	margin-bottom: 10px;
+}
+.icon-6x{font-size:6em}
+.icon-6x.icon-border{border-width:4px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}
+.icon-5x{font-size:5em}
+.icon-5x.icon-border{border-width:4px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}
+.top-5 {
+	margin-top: 5px;
+}
+.top-10 {
+	margin-top: 10px;
+}
+.right-5{
+	margin-right: 5px;
+}
+.txt-12 {
+	font-size: 12px;
+}
+.bold {
+	font-weight: bold;
+}
+.left-20 {
+	margin-left: 20px;
+}
+.left-p-20 {
+	padding-left: 20px;
+}

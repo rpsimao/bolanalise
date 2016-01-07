@@ -1,0 +1,54 @@
+<?php if (count($this->messages) > 0): ?>
+<?php if ($this->messages[0] == "error"): ?>
+<?=$this->FlashInfo('error', $this->messages[1]);?>
+<?php elseif ($this->messages[0] == "success"):?>
+<?=$this->FlashInfo('success', $this->messages[1]);?>
+<?php else:?>
+<?=$this->FlashInfo('info', $this->messages[1]);?>
+<?php endif;?>
+<?php endif;?>
+<div id="flash-email"></div>
+<div class="container-fluid mywhite">
+	<div class="row-fluid">
+		<div class="span12 ">
+		    <?php if ($this->total > 0):?>
+		    <h3><i class="icon-file-alt"></i> <?=$this->total;?> Boletins Análise Semana Currente [<?=date('W')?>]</h3>
+			<table class="table table-striped txtsmall">
+				<tr>
+					<th><i class="icon-list-alt"></i> Bol. Nº</th>
+					<th><i class="icon-user"></i> Cliente</th>
+					<th><i class="icon-folder-close"></i> Produto</th>
+					<th><i class="icon-calendar"></i> Data</th>
+					<th><i class="icon-edit"></i> Editar</th>
+					<th><i class="icon-trash"></i> Apagar</th>
+					<th><i class="icon-envelope"></i> Email</th>
+				</tr>
+			     <?php foreach ($this->boletins as $boletim):?>
+			     <?php $uid = uniqid();?>
+			    <tr>
+					<td><i class="icon-print icon-black"></i> <a href="/boletim/renderpdf/<?=$boletim['id'];?>"><?=$boletim['id'];?></a></td>
+					<td><?=$boletim['cliente']?></td>
+					<td><i class="icon-picture icon-black" id="thumb-<?=$boletim['obra']?>-<?=$uid?>" onmouseover="mypopover('<?=$boletim['obra']?>-<?=$uid?>');" style="cursor:pointer;"></i>&nbsp;<?=$boletim['produto']?><span class="pull-right"><a href="http://embalagem.intranet.fterceiro.pt/obra/<?=$boletim['obra']?>" target="_blank"><i class="icon-external-link-sign"></i></a></span></td>
+					    <td><?=$boletim['datetime'];?></td>
+					    <td><a class="btn btn-mini" href="#authModalEdit" data-toggle="modal" data-target="#authModal-<?=$boletim['id'];?>">Editar</a>
+					    <td><a class="btn btn-mini btn-danger" href="#authModalRemove" data-toggle="modal" data-target="#authModal-<?=$boletim['id'];?>-remove">Apagar</a>
+					    <?php $mailStatus = RPS_Aux_MailSent::check($boletim['id'], $boletim['cliente']);?>
+				    <td id="<?=$boletim['id'];?>"><?=$mailStatus;?></td>
+				</tr>
+			    <?php endforeach;?>
+			</table>
+			<?php if ($this->total > 10):?>
+			    <div class="pagination-div">
+			<?=$this->paginationControl($this->boletins, 'Sliding', 'pagination/pagination.phtml');?>
+			    </div>
+			<?php endif;?>
+			<?php else:?>
+	             <p>&nbsp;</p>
+	            <?=$this->Flashinfo('info', 'Não existe nenhum boletim para esta data.');?>
+	        <?php endif;?>
+		</div>
+	</div>
+</div>
+<?php echo $this->partialLoop('partials/auth.phtml', $this->boletins) ?>
+<?php echo $this->partialLoop('partials/delete.phtml', $this->boletins) ?>
+<script type="text/javascript" src="/js/ajax/mail.js"></script>

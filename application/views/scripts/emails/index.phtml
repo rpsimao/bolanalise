@@ -1,0 +1,34 @@
+<div id="error-flash-email"></div>
+<div id="email-clients-table-refresh">
+	<div id="flash-email"></div>
+		<div class="container-fluid mywhite">
+			<div class="row-fluid">
+				<div class="span12 ">
+					<div class="pull-left"><h3>Emails Clientes</h3></div>
+					<div class="pull-right" style="padding-top: 15px;"><a id="create-new-customer-emails" class="btn btn-mini btn-primary" href="#" onclick="createNewRowEmail()"><i class="icon-plus-sign"></i>&nbsp;&nbsp;Adicionar novo</a></div>
+					<table class="table table-striped txtsmall" id="table-new-customer-emails">
+						<thead>
+							<tr>
+								<th><i class="icon-user"></i> Cliente</th>
+								<th><i class="icon-envelope"></i> Emails</th>
+								<th><i class="icon-edit"></i> Editar</th>
+								<th><i class="icon-trash"></i> Apagar</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php foreach ($this->records as $cliente): ?>
+						<?php $uid = uniqid();?>
+							<tr id="<?=$uid;?>">
+								<td id="<?=$cliente['id']?>" name="<?=$cliente['id']?>"><?=$cliente["clientes"]?></td>
+								<td id="email-<?=$cliente['id']?>" name="email-<?=$cliente['id']?>"><?=str_replace(";", "<br />", $cliente['emails'])?></td>
+								<td id="button-emails-<?=$cliente['id']?>"><a class="btn btn-mini btn-info" href="#" onclick="changeRow(<?=$cliente['id']?>)"><i class="icon-pencil"></i> Alterar</a></td>
+								<td id="button-remove-emails-<?=$cliente['id']?>"><a class="btn btn-mini btn-danger" href="#" onclick="deleteEmailCliente(<?=$cliente['id']?>,'<?=$uid;?>')"><i class="icon-remove"></i> Apagar</a></td>
+							</tr>
+
+						<?php endforeach;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+</div>

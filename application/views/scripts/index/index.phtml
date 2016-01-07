@@ -1,0 +1,19 @@
+<?php if (count($this->messages) > 0): ?>
+<?php if ($this->messages[0] == "error"): ?>
+<?=$this->Flashinfo('error', $this->messages[1]);?>
+<?php elseif ($this->messages[0] == "success"):?>
+<?=$this->Flashinfo('success', $this->messages[1]);?>
+<?php else:?>
+<?=$this->Flashinfo('info', $this->messages[1]);?>
+<?php endif;?>
+<?php endif;?>
+<div class="initform" id="initform">
+<legend><i class="icon-lock" id="init-lock-form"></i> Autenticação</legend>
+<?=$this->form->render();?>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#password").focus();
+});
+
+</script>

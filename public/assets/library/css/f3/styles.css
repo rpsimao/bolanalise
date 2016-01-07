@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+@font-face {
+    font-family: 'TitilliumWeb-Regular';
+    src: url('http://cdn.fterceiro.pt/library/fonts/Titillium_Web/TitilliumWeb-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+.txt-sz-12 {
+	font-size: 12px;
+}
+.txt-sz-14 {
+	font-size: 14px;
+}
+.txt-sz-16 {
+	font-size: 16px;
+}
+.txt-sz-18 {
+	font-size: 18px;
+}
+.txt-sz-20 {
+	font-size: 20px;
+}
+.mg-bottom-5{
+	margin-bottom: 5px;
+}
+.mg-bottom-8{
+	margin-bottom: 8px;
+}
+.mg-bottom-10{
+	margin-bottom: 10px;
+}
+.icon-6x{font-size:6em}
+.icon-6x.icon-border{border-width:4px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}
+.icon-5x{font-size:5em}
+.icon-5x.icon-border{border-width:4px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}
+.mg-top-5 {
+	margin-top: 5px;
+}
+.mg-top-10 {
+	margin-top: 10px;
+}
+.mg-right-5{
+	margin-right: 5px;
+}
+
+.mg-left-10{
+	margin-left: 10px;
+}
+.txt-12 {
+	font-size: 12px;
+}
+.bold {
+	font-weight: bold;
+}
+.left-20 {
+	margin-left: 20px;
+}
+.txt80{
+	font-size: 80%;
+}
+.txt85{
+	font-size: 85%;
+}
+.txt90{
+	font-size: 90%;
+}
+.txt95{
+	font-size: 95%;
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Application"  default="main" basedir=".">
+
+	<!-- Set date -->
+	<tstamp>
+		<format property="DATE" pattern="%c" locale="pt_PT" />
+	</tstamp>
+	
+	<target name="get-env" description="get the environment for an action">
+      <property file="test.properties"/>
+    </target>
+	
+	<taskdef name="sshdeploy" classname="tasks.ext.RPSSshDeployTask" />
+	
+	<target name="prepare">
+		<!-- Create new symlink to maintenece page -->
+		<echo>---------------------------------</echo>
+		<echo>|     Removing old files...     |</echo>
+		<echo>---------------------------------</echo>
+		<delete dir="${DEPLOY_DIR}" includeemptydirs="true" verbose="false" failonerror="true" />
+		
+		<echo>----------------------------------</echo>
+		<echo>|        Create new dir...       |</echo>
+		<echo>----------------------------------</echo>
+		<mkdir dir="${DEPLOY_DIR}" />
+	</target>
+
+	<target name="copy" depends="prepare">
+		<echo>------------------------------------------------------------------------------------</echo>
+		<echo>|  Copying files to the ${DEPLOY_DIR} directory... |</echo>
+		<echo>------------------------------------------------------------------------------------</echo>
+		<copy todir="${DEPLOY_DIR}">
+			<fileset dir="${REPO_DIR}">
+				<include name="**" />
+				<include name="cache/" />
+				<exclude name="build/" />
+				<exclude name="lib/" />
+				<exclude name="docs/" />
+				<exclude name="tests/" />
+				<exclude name="sample/" />
+				<exclude name="tmp/" />
+				<exclude name=".git/" />
+				<exclude name=".gitignore" />
+				<exclude name=".zfproject.xml" />
+				<exclude name=".DS_Store" />
+				<exclude name=".buildpath" />
+				<exclude name=".project" />
+				<exclude name=".settings/" />
+				<exclude name=".svn/" />
+				<exclude name=".psd" />
+			</fileset>
+			<filterchain>
+				<replacetokens begintoken="@@" endtoken="@@">
+					<token key="BuildDate" value="${DSTAMP} - ${TSTAMP}" />
+					</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+	
+	<target name="synchronize" depends="copy">
+		<echo>-------------------------------------------------------</echo>
+	    <echo>|     Synchronizing files with ${sync.remote.host}    |</echo>
+	    <echo>-------------------------------------------------------</echo>
+		<taskdef name="sync" classname="phing.tasks.ext.FileSyncTask" />
+		<sync
+			sourcedir="${sync.source.dir}" 
+			destinationdir="${sync.remote.user}@${sync.remote.host}:${remote.test.deploy.dir}" 
+			verbose="true" />
+		<taskdef name="sync" classname="phing.tasks.ext.FileSyncTask" />
+			
+	</target>
+	
+					
+	
+	<target name="main" depends="get-env,prepare,copy,synchronize" >
+		<echo>=======================================</echo>
+		<echo>=======================================</echo>
+		<echo>            !!BUILD FINISH!!           </echo>
+		<echo>=======================================</echo>
+		<echo>=======================================</echo>
+	</target>	
+</project>

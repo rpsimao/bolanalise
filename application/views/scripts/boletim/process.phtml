@@ -1,0 +1,39 @@
+<div class="container">
+<?php
+echo $this->Flashinfo('success', 'O Boletim de Análise ' . $this->bolid .' foi criado com sucesso.');
+ 
+if ($this->jobstatus == 20)
+        {
+           echo $this->Flashinfo('info', 'O trabalho no Optimus está fechado.');
+        } else {
+           echo $this->Flashinfo('error', 'O trabalho no Optimus não está fechado.');
+        }
+?>
+	
+			<ul class="thumbnails">
+				<li class="span3">
+					<div class="thumbnail mywhite spacer10">
+						<i class="icon-cloud-download icon-5x centerz"></i>
+						<hr />
+						<h3>Criar PDF</h3>
+						<p>Utilize esta opção para fazer um PDF do Boletim de Análise que
+							acabou de criar.</p>
+						<div class="centerz">
+							<a href="/boletim/renderpdf/<?=$this->bolid;?>"
+								class="btn btn-primary" type="button" target="_blank">Criar PDF</a>
+						</div>
+					</div>
+				</li>
+				<li class="span3">
+					<div class="thumbnail mywhite spacer10">
+						<i class="icon-list-alt icon-5x centerz"></i>
+						<hr />
+						<h3>Novo Boletim</h3>
+						<p>Utilize esta opção para criar um novo Boletim de Análise.</p>
+						<div class="centerz">
+							<a href="/" class="btn btn-primary" type="button">Novo Boletim</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+</div>

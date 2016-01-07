@@ -1,0 +1,23 @@
+<?php echo $this->doctype();?>
+<html lang="pt">
+<head>
+<?php echo $this->headTitle();?>
+<?php echo $this->headMeta();?>
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
+
+</head>
+<body>
+<?=$this->Navbar();?>
+
+	<div class="container">
+
+     <?php echo $this->layout()->content; ?>
+
+    </div>
+	<!-- /container -->
+	<div class='notifications bottom-right'></div>
+	<?php echo $this->JSHelper() ?> 
+</body>
+</html>
+

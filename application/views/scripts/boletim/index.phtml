@@ -1,0 +1,296 @@
+<script type="text/javascript" src="http://cdn.fterceiro.pt/library/plugins/qtip2/jquery.qtip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.fterceiro.pt/library/plugins/qtip2/jquery.qtip.min.css"/>
+<?php if ($this->errors) :?>
+<div class="initform" id="initform">
+	<legend>Autenticação</legend>
+<?=$this->form->render();?>
+</div>
+<?php else: ?>
+<?php $form = $this->bolform;?>
+
+<div id="msg" class="alert alert-error">
+<button type="button" class="close" data-dismiss="alert">×</button>
+  <span id="msg_txt"></span>
+</div>
+<form id="boletim_completo" method="post" action="/boletim/process" onsubmit="return validatebolform()">
+
+	<div class="infooptimus">
+		<table>
+		    <tr><td>
+		    Olá <?=$this->username['real_name'];?> - Criação do Boletim de Análise Nº <?=$this->init_values['bolanalise'];?>
+		    <?=$form->getElement('id')->setDecorators(array('ViewHelper'))->setValue($this->init_values['bolanalise']);?>
+		    <?=$form->getElement('password')->setDecorators(array('ViewHelper'))->setValue($this->init_values['password']);?>
+		    </td>
+		    <td id="gtm" class="left-p-20"></td>
+		    <td id="loading-animation"></td>
+		    </tr>
+		</table>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span2">
+                <div class="tabbable tabs-left">
+					<ul class="nav nav-tabs">
+					    <li class="active"><a href="#tab1" data-toggle="tab"><i class="icon-hdd"></i> Dados Optimus</a></li>
+						<li><a href="#tab2" data-toggle="tab"><i class="icon-check"></i> Características Controladas</a></li>
+						<li><a href="#tab3" data-toggle="tab"><i class="icon-thumbs-up"></i> Decisão Tomada</a></li>
+						<li><a href="#tab4" data-toggle="tab"><i class="icon-filter"></i> Amostragem</a></li>
+						<li><a href="#tab5" data-toggle="tab"><i class="icon-comments"></i> Observações</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="span10 mywhite">
+				<div class="row-fluid">
+					<div class="span10">
+						<div class="tab-content">
+							<div class="tab-pane active space" id="tab1">
+							    <p>Dados do Optimus. Alterar se necessário.</p>
+								<table class="table table-striped txtsmall">
+                        		    <tr>
+                        		        <td><i class="icon-briefcase"></i> Obra Nº:</td>
+                        		        <td><?=$form->getElement('obra')->setDecorators(array('ViewHelper'))->setValue($this->init_values['obra']);?></td>
+                        		        <td><i class="icon-user"></i> Cliente:</td>
+                            		    <td><?=$form->getElement('cliente')->setDecorators(array('ViewHelper'))->setValue(utf8_encode($this->customername[0]['cu_name']));?></td>
+                            		</tr>
+                            		<tr>    
+                            		    <td><i class="icon-align-justify"></i> Quantidade:</td>
+                            		    <td><?=$form->getElement('quantidade')->setDecorators(array('ViewHelper'))->setValue($this->qty);?></td>
+                            		    <td><i class="icon-folder-close"></i> Produto:</td>
+                            		    <td><?=$form->getElement('produto')->setDecorators(array('ViewHelper'))->setValue(utf8_encode(str_replace('"', '', $this->opt_values[0]['j_title1'])));?></td>
+                            		</tr>
+                            		<tr>    
+                            		    <td><i class="icon-barcode"></i> Código:</td>
+                            		    <td><?=$form->getElement('codigo')->setDecorators(array('ViewHelper'))->setValue(utf8_encode($this->opt_values[0]['j_title2']));?></td>
+                            		    <td><i class="icon-list-alt"></i> V/Enc:</td>
+                            		    <td><?=$form->getElement('encomenda')->setDecorators(array('ViewHelper'))->setValue(utf8_encode($this->opt_values[0]['j_ordnum']));?></td>
+                            		 </tr>   
+                            	</table>
+                            	 <div class="txt-optimus-index">
+                            	      <table class="table-opt">
+                            	          <tr>
+                            	              <th><span id="et-th" class="table-opt-click"><i class="icon-eye-open"></i> Especificações Técnicas</span></th>
+                            	              <th><span id="ie-th" class="table-opt-click"><i class="icon-eye-open"></i> Instruções Especiais</span></th>
+                            	              <th><span id="img-th" class="table-opt-click"><i class="icon-eye-open"></i> Imagem</span></th>
+                            	           </tr>
+                            	           <tr>
+                            	           <td><span id="et"><textarea><?=utf8_encode($this->txt1['sect_text']);?></textarea></span></td>
+                            	           <td><span id="ie"><textarea><?=utf8_encode($this->txt2['sect_text']);?></textarea></span></td>
+                            	           <td><span id="img"><?=$this->image;?></span></td>
+                            	      </table>
+                                      
+                                    </div>
+							</div>
+							<div class="tab-pane space" id="tab2">
+								<div class="tabbable">
+								    <ul class="nav nav-tabs">
+                					    <li class="active"><a href="#tab-cc1" data-toggle="tab"><i class="icon-file"></i> Matéria Prima</a></li>
+                						<li><a href="#tab-cc2" data-toggle="tab"><i class="icon-tint"></i> Impressão</a></li>
+                						<li><a href="#tab-cc3" data-toggle="tab"><i class="icon-map-marker"></i> Corte e Vinco</a></li>
+                						<li><a href="#tab-cc4" data-toggle="tab"><i class="icon-resize-full"></i> Fecho Cartonagem</a></li>
+                						<li><a href="#tab-cc5" data-toggle="tab"><i class="icon-truck"></i> Acondicionamento</a></li>
+                					</ul>
+								</div>
+								<div class="tab-content">
+    								<div class="tab-pane active" id="tab-cc1">
+    								    <table class="table table-striped txtsmall">
+                                        		<tr>
+                                        			<th>1. Mat&eacute;ria Prima</th>
+                                        			<th></th>
+                                        			<th></th>
+                                        		</tr>
+                                        		<tr>
+                                        			<td class="esp" onclick="checkMyBox('tipo')">Tipo:</td>
+                                        			<td><?=$form->getElement('tipo_txt')->setDecorators(array('ViewHelper'))->setAttrib('onfocus',"checkMyBox('tipo')")->setValue($this->tipo);?></td>
+                                        			<td><?=$form->getElement('tipo')->setDecorators(array('ViewHelper'));?></td>
+                                        		</tr>
+                                        		<tr>
+                                        			<td class="esp" onclick="checkMyBox('gramagem')">Gramagem M&eacute;dia (g/m<sup>2</sup>):</td>
+                                        			<td><?=$form->getElement('gramagem_txt')->setDecorators(array('ViewHelper'))->setAttrib('onfocus',"checkMyBox('gramagem')")->setValue($this->gramagem);?></td>
+                                        			<td><?=$form->getElement('gramagem')->setDecorators(array('ViewHelper'));?></td>
+                                        		</tr>
+                                        		<tr>
+                                        			<td class="esp" onclick="checkMyBox('espessura')">Espessura M&eacute;dia (mm):</td>
+                                        			<td><?=$form->getElement('espessura_txt')->setDecorators(array('ViewHelper'))->setAttrib('onfocus',"checkMyBox('espessura')")->setValue($this->espessura);?></td>
+                                        			<td><?=$form->getElement('espessura')->setDecorators(array('ViewHelper'));?></td>
+                                        		</tr>
+                                        		<tr>
+                                        			<td class="esp" onclick="checkMyBox('fibra')">Sentido Fibra</td>
+                                        			<td></td>
+                                        			<td><?=$form->getElement('fibra')->setDecorators(array('ViewHelper'));?></td>
+                                        		</tr>
+                                        	</table>
+    								</div>
+    								<div class="tab-pane" id="tab-cc2">
+    								    <table class="table table-striped txtsmall">
+                                    		<tr>
+                                    			<th>2. Impress&atilde;o</th>
+                                    			<th></th>
+                                    			<th></th>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('texto')">Texto (grafismo / padr&atilde;o aprovado)</td>
+                                    			<td></td>
+                                    			<td><?=$form->getElement('texto')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('cores')">Cores (pantones/ padr&atilde;o aprovado):</td>
+                                    			<td><?=$form->getElement('cores_txt')->setDecorators(array('ViewHelper'))->setAttrib('onfocus',"checkMyBox('cores')")->setValue($this->cores);?></td>
+                                        		<td><?=$form->getElement('cores')->setDecorators(array('ViewHelper'));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('verniz')">Verniz</td>
+                                    			<td></td>
+                                    			<td><?=$form->getElement('verniz')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp"  onclick="checkMyBox('qualidade_impressao')">Qualidade de impress&atilde;o (repintes, sujidades, etc)</td>
+                                    			<td></td>
+                                    			<td><?=$form->getElement('qualidade_impressao')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('codigo_barras')">Leitura c&oacute;digo de barras</td>
+                                    			<td></td>
+                                    			<td><?=$form->getElement('codigo_barras')->setDecorators(array('ViewHelper'));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('codigo_laetus')">C&oacute;digo Laetus</td>
+                                    			<td></td>
+                                    			<td><?=$form->getElement('codigo_laetus')->setDecorators(array('ViewHelper'));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('tinta_reactiva')">Tinta reactiva</td>
+                                    			<td></td>
+                                    			<td><?=$form->getElement('tinta_reactiva')->setDecorators(array('ViewHelper'));?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('codigo_descodificador')">C&oacute;digo descodificador</td>
+                                    			<td></td>
+                                    			<td><?=$form->getElement('codigo_descodificador')->setDecorators(array('ViewHelper'));?></td>
+                                    		</tr>
+                                    		</table>
+    								</div>
+    								<div class="tab-pane" id="tab-cc3">
+    								    <table class="table table-striped txtsmall">
+                                        		<tr>
+                                        			<td><b>3. Corte e Vinco</b></td>
+                                        			<td></td>
+                                        			<td></td>
+                                        		</tr>
+                                        		<tr>
+                                        			<td class="esp" onclick="checkMyBox('qualidade_corte_vinco')">Qualidade do corte e vinco (vincos / cortes / picote)</td>
+                                        			<td></td>
+                                        			<td><?=$form->getElement('qualidade_corte_vinco')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                        		</tr>
+                                        		<tr>
+                                        			<td class="esp" onclick="checkMyBox('dimensoes_cartonagem')">Dimens&otilde;es da cartonagem:</td>
+                                        			<td><?=$form->getElement('dimensoes_cartonagem_txt')->setDecorators(array('ViewHelper'))->setAttrib('onfocus',"checkMyBox('dimensoes_cartonagem')")->setValue($this->dimensoes);?></td>
+                                        		    <td><?=$form->getElement('dimensoes_cartonagem')->setDecorators(array('ViewHelper'));?></td>
+                                        		</tr>
+                                        		<tr>
+                                        			<td class="esp" onclick="checkMyBox('braille')">Braille</td>
+                                        			<td></td>
+                                        			<td><?=$form->getElement('braille')->setDecorators(array('ViewHelper'));?></td>
+                                        		</tr>
+                                       </table>
+    								</div>
+    								<div class="tab-pane" id="tab-cc4">
+    								    <table class="table table-striped txtsmall">
+                                    		<tr>
+                                    			<td><b>4. Fecho da Cartonagem</b></td>
+                                    			<td></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('qualidade_colagem')">Qualidade da colagem</td>
+                                    			<td><?=$form->getElement('qualidade_colagem')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('funcionamento_cartonagem')">Funcionamento da cartonagem</td>
+                                    			<td><?=$form->getElement('funcionamento_cartonagem')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('friccao')">Teste de Fric&ccedil;&atilde;o</td>
+                                    			<td><?=$form->getElement('friccao')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    	</table>
+    								</div>
+    								<div class="tab-pane" id="tab-cc5">
+    								    <table class="table table-striped txtsmall">
+                                    		<tr>
+                                    			<td><b>5. Acondicionamento:</b></td>
+                                    	        <td></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('condicoes_acondicionamento')">Condi&ccedil;&otilde;es de acondicionamento</td>
+                                    			<td><?=$form->getElement('condicoes_acondicionamento')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    		<tr>
+                                    			<td class="esp" onclick="checkMyBox('informacao_rotulo')">Informa&ccedil;&atilde;o do r&oacute;tulo</td>
+                                    			<td><?=$form->getElement('informacao_rotulo')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                    		</tr>
+                                    	</table>
+    								</div>
+								</div>
+							</div>
+							<div class="tab-pane space" id="tab3">
+							    <p>Decisão Tomada</p>
+    							<table class="table table-striped txtsmall">
+                                	<tr>
+                                		<td><b>Aprovado:</b></td>
+                                		<td><?=$form->getElement('aprovado')->setDecorators(array('ViewHelper'));//->setAttrib('checked', 'yes');?></td>
+                                		<td class="esp"><b>Data Aprova&ccedil;&atilde;o:</b></td>
+                                		<td><?=$form->getElement('data')->setDecorators(array('ViewHelper'))->setValue(Zend_Date::now()->toString('YYYY-MM-dd'));?></td>
+                                		<td class="esp"><b>Aprovado Por:</b></td>
+                                		<td><?=$form->getElement('aprovado_por')->setDecorators(array('ViewHelper'))->setValue($this->username['real_name']);?></td>
+                                		
+                                	</tr>
+                                </table>
+							</div>
+							<div class="tab-pane space" id="tab4">
+							    <p>Amostragem</p>
+							    <table class="table table-striped txtsmall">
+                                		<tr>
+                                			<td>N&ordm; Embalagens Inpeccionadas:</td>
+                                			<td><?=$form->getElement('embalagens_inspeccionadas')->setDecorators(array('ViewHelper'));?></td>
+                                		</tr>
+                                		<tr>
+                                			<td>N&ordm; Defeitos Maiores</td>
+                                			<td><?=$form->getElement('defeitos_maiores')->setDecorators(array('ViewHelper'));?></td>
+                                		</tr>
+                                		<tr>
+                                			<td>N&ordm; Defeitos Menores</td>
+                                			<td><?=$form->getElement('defeitos_menores')->setDecorators(array('ViewHelper'));?></td>
+                                 		</tr>
+                                	</table>
+							</div>
+							<div class="tab-pane space" id="tab5">
+							    <p>Observa&ccedil;&otilde;es:</p>
+	                            <?=$form->getElement('obs')->setDecorators(array('ViewHelper'));?>
+							</div>
+						 </div>
+					</div>
+					<!--/span-->
+
+
+				</div>
+				<!--/row-->
+
+			</div>
+			<!--/span-->
+		</div>
+		<!--/row-->
+<div class="form_boletins_submit">
+<?=$form->getElement('submit')->setDecorators(array('ViewHelper'))->setAttrib('class', 'btn btn-primary')->setLabel('Criar Boletim de Análise');?>
+</div>
+		<hr>
+
+		
+
+	</div>
+	<!--/.fluid-container-->
+</form>
+<?php endif;?>
+<script type="text/javascript" src="/js/boletim/verify.js"></script>
+
+
+
+
